@@ -18,7 +18,6 @@ from dtb.settings import TELEGRAM_TOKEN, DEBUG
 
 from tgbot.handlers.utils import files, error
 from tgbot.handlers.admin import handlers as admin_handlers
-from tgbot.handlers.location import handlers as location_handlers
 from tgbot.handlers.onboarding import handlers as onboarding_handlers
 from tgbot.handlers.broadcast_message import handlers as broadcast_handlers
 from tgbot.handlers.onboarding.manage_data import SECRET_LEVEL_BUTTON
@@ -37,10 +36,6 @@ def setup_dispatcher(dp):
     dp.add_handler(CommandHandler("admin", admin_handlers.admin))
     dp.add_handler(CommandHandler("stats", admin_handlers.stats))
     dp.add_handler(CommandHandler('export_users', admin_handlers.export_users))
-
-    # location
-    dp.add_handler(CommandHandler("ask_location", location_handlers.ask_for_location))
-    dp.add_handler(MessageHandler(Filters.location, location_handlers.location_handler))
 
     # secret level
     dp.add_handler(CallbackQueryHandler(onboarding_handlers.secret_level, pattern=f"^{SECRET_LEVEL_BUTTON}"))
@@ -116,7 +111,6 @@ def set_up_commands(bot_instance: Bot) -> None:
             'start': 'Start django bot 🚀',
             'stats': 'Statistics of bot 📊',
             'admin': 'Show admin info ℹ️',
-            'ask_location': 'Send location 📍',
             'broadcast': 'Broadcast message 📨',
             'export_users': 'Export users.csv 👥',
         },
@@ -124,7 +118,6 @@ def set_up_commands(bot_instance: Bot) -> None:
             'start': 'Iniciar el bot de django 🚀',
             'stats': 'Estadísticas de bot 📊',
             'admin': 'Mostrar información de administrador ℹ️',
-            'ask_location': 'Enviar ubicación 📍',
             'broadcast': 'Mensaje de difusión 📨',
             'export_users': 'Exportar users.csv 👥',
         },
@@ -132,7 +125,6 @@ def set_up_commands(bot_instance: Bot) -> None:
             'start': 'Démarrer le bot Django 🚀',
             'stats': 'Statistiques du bot 📊',
             'admin': "Afficher les informations d'administrateur ℹ️",
-            'ask_location': 'Envoyer emplacement 📍',
             'broadcast': 'Message de diffusion 📨',
             "export_users": 'Exporter users.csv 👥',
         },
@@ -141,7 +133,6 @@ def set_up_commands(bot_instance: Bot) -> None:
             'stats': 'Статистика бота 📊',
             'admin': 'Показать информацию для админов ℹ️',
             'broadcast': 'Отправить сообщение 📨',
-            'ask_location': 'Отправить локацию 📍',
             'export_users': 'Экспорт users.csv 👥',
         }
     }
