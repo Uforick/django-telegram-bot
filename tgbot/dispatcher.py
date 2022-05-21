@@ -17,7 +17,6 @@ from dtb.celery import app  # event processing in async mode
 from dtb.settings import TELEGRAM_TOKEN, DEBUG
 
 from tgbot.handlers.utils import files, error
-from tgbot.handlers.admin import handlers as admin_handlers
 from tgbot.handlers.onboarding import handlers as onboarding_handlers
 from tgbot.handlers.broadcast_message import handlers as broadcast_handlers
 from tgbot.handlers.onboarding.manage_data import SECRET_LEVEL_BUTTON
@@ -31,11 +30,6 @@ def setup_dispatcher(dp):
     """
     # onboarding
     dp.add_handler(CommandHandler("start", onboarding_handlers.command_start))
-
-    # admin commands
-    dp.add_handler(CommandHandler("admin", admin_handlers.admin))
-    dp.add_handler(CommandHandler("stats", admin_handlers.stats))
-    dp.add_handler(CommandHandler('export_users', admin_handlers.export_users))
 
     # secret level
     dp.add_handler(CallbackQueryHandler(onboarding_handlers.secret_level, pattern=f"^{SECRET_LEVEL_BUTTON}"))
@@ -109,31 +103,19 @@ def set_up_commands(bot_instance: Bot) -> None:
     langs_with_commands: Dict[str, Dict[str, str]] = {
         'en': {
             'start': 'Start django bot 🚀',
-            'stats': 'Statistics of bot 📊',
-            'admin': 'Show admin info ℹ️',
             'broadcast': 'Broadcast message 📨',
-            'export_users': 'Export users.csv 👥',
         },
         'es': {
             'start': 'Iniciar el bot de django 🚀',
-            'stats': 'Estadísticas de bot 📊',
-            'admin': 'Mostrar información de administrador ℹ️',
             'broadcast': 'Mensaje de difusión 📨',
-            'export_users': 'Exportar users.csv 👥',
         },
         'fr': {
             'start': 'Démarrer le bot Django 🚀',
-            'stats': 'Statistiques du bot 📊',
-            'admin': "Afficher les informations d'administrateur ℹ️",
             'broadcast': 'Message de diffusion 📨',
-            "export_users": 'Exporter users.csv 👥',
         },
         'ru': {
             'start': 'Запустить django бота 🚀',
-            'stats': 'Статистика бота 📊',
-            'admin': 'Показать информацию для админов ℹ️',
             'broadcast': 'Отправить сообщение 📨',
-            'export_users': 'Экспорт users.csv 👥',
         }
     }
 
