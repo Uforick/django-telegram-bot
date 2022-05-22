@@ -25,13 +25,3 @@ def make_keyboard_for_start_command(user) -> InlineKeyboardMarkup:
     # ]]
 
     return InlineKeyboardMarkup(buttons)
-
-
-
-
-    texts = []
-    trening_button = []
-    buttons = []
-    trenings = Trening.objects.all()
-    for trening in trenings:
-        trening_button.append(trening)
