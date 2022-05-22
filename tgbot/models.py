@@ -297,7 +297,7 @@ class User(CreateUpdateTracker):
         Trening,
         related_name='user',
         verbose_name='Доступные тренировки',
-        # default=default_trening, тестовая строка, #расскоментировать после создания первого тренинка
+        default=default_trening, #тестовая строка, расскоментировать после создания первого тренинка
     )
     
     
