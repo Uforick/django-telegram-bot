@@ -10,7 +10,7 @@ def make_keyboard_for_start_command(user) -> InlineKeyboardMarkup:
     buttons = []
     trenings = Trening.objects.all()
     for trening in trenings:
-        if trening in user.available_training:
+        if trening in user.available_training.all():
             trening_button.append(trening)
     for spec in trening_button:
         buttons.append(
