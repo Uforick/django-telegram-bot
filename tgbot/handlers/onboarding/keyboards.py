@@ -6,12 +6,12 @@ from tgbot.models import Trening
 
 
 def make_keyboard_for_start_command(user) -> InlineKeyboardMarkup:
-    texts = []
     trening_button = []
     buttons = []
     trenings = Trening.objects.all()
     for trening in trenings:
-        trening_button.append(trening)
+        if trening in user.available_training:
+            trening_button.append(trening)
     for spec in trening_button:
         buttons.append(
             [InlineKeyboardButton(
