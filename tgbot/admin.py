@@ -4,7 +4,18 @@ from django.shortcuts import render
 
 from dtb.settings import DEBUG
 
-from tgbot.models import User
+from tgbot.models import (
+    User,
+    Exercise,
+    TreningDay,
+    TreningWeek,
+    Cycle,
+    Trening,
+    AddCycleInTrening,
+    AddWeekInCycle,
+    AddTreningdayInWeek,
+    AddExerciseInTreningDay,
+)
 from tgbot.forms import BroadcastForm
 
 from tgbot.tasks import broadcast_message
@@ -46,3 +57,58 @@ class UserAdmin(admin.ModelAdmin):
             return render(
                 request, "admin/broadcast_message.html", {'form': form, 'title': u'Broadcast message'}
             )
+
+
+class AddExerciseInTreningDayAdmin(admin.TabularInline):
+    model = AddExerciseInTreningDay
+
+
+class AddTreningdayInWeekAdmin(admin.TabularInline):
+    model = AddTreningdayInWeek
+
+
+class AddWeekInCycleAdmin(admin.TabularInline):
+    model = AddWeekInCycle
+
+
+class AddCycleInTreningAdmin(admin.TabularInline):
+    model = AddCycleInTrening
+
+
+@admin.register(TreningDay)
+class TreningDayAdmin(admin.ModelAdmin):
+    list_display = ('admin_name', )
+    search_fields = ('admin_name', )
+    empty_value_display = '-пусто-'
+    inlines = [AddExerciseInTreningDayAdmin]
+
+
+@admin.register(TreningWeek)
+class TreningWeekAdmin(admin.ModelAdmin):
+    list_display = ('admin_name', )
+    search_fields = ('admin_name', )
+    empty_value_display = '-пусто-'
+    inlines = [AddTreningdayInWeekAdmin]
+
+
+@admin.register(Cycle)
+class CycleAdmin(admin.ModelAdmin):
+    list_display = ('admin_name', )
+    search_fields = ('admin_name', )
+    empty_value_display = '-пусто-'
+    inlines = [AddWeekInCycleAdmin]
+
+
+@admin.register(Trening)
+class TreningAdmin(admin.ModelAdmin):
+    list_display = ('name', )
+    search_fields = ('name', )
+    empty_value_display = '-пусто-'
+    inlines = [AddCycleInTreningAdmin]
+
+
+@admin.register(Exercise)
+class ExerciseAdmin(admin.ModelAdmin):
+    list_display = ('name', 'short_discription', 'long_discription', 'representation')
+    search_fields = ('name', )
+    empty_value_display = '-пусто-'
