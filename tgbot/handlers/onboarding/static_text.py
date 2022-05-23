@@ -6,8 +6,8 @@ choise_week = "Вы выбрали {name_week}. Выберете трениро�
 
 github_button_text = "GitHub"
 secret_level_button_text = "Secret level🗝"
-trening_text = "Тренировачный день: {trening_day}\n" \
-            "Упражнение: {exercise}\n" \
+trening_text = "Упражнение: {exercise}\n" \
             "Описание упражнения: {short_discription}\n" \
+            "Описание выполнения: {long_discription}\n" \
             "Выполнение: {representation}\n" \
             "Подходы \ повторы \ RIR: {cycle} \ {amount} \ {rir}" 

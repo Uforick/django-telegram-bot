@@ -35,6 +35,7 @@ def setup_dispatcher(dp):
     dp.add_handler(CallbackQueryHandler(onboarding_handlers.cycle_after_trening, pattern=rf"^{TRENING_BUTTON}(/s)?.*"))
     dp.add_handler(CallbackQueryHandler(onboarding_handlers.week_after_cycle, pattern=rf"^{CYCLE_BUTTON}(/s)?.*"))
     dp.add_handler(CallbackQueryHandler(onboarding_handlers.day_after_week, pattern=rf"^{WEEK_BUTTON}(/s)?.*"))
+    dp.add_handler(CallbackQueryHandler(onboarding_handlers.exercise_on_day, pattern=rf"^{DAY_BUTTON}(/s)?.*"))
 
     # broadcast message
     dp.add_handler(
