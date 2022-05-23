@@ -1,7 +1,5 @@
 # Telegram bot for individual trainings
 
-[![Sparkline](https://stars.medv.io/ohld/django-telegram-bot.svg)](https://stars.medv.io/ohld/django-telegram-bot)
-
 
 ### Check the example bot that uses the code from Main branch: [t.me/djangotelegrambot](https://t.me/djangotelegrambot)
 Telegram bot with the ability to create individual trainings and training groups. Thanks to the benefits of the Django admin panel, it is possible to personalize workouts for a person or a group of people.
