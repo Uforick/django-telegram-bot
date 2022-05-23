@@ -7,7 +7,7 @@ from telegram.ext import CallbackContext
 
 from tgbot.handlers.onboarding import static_text
 from tgbot.handlers.utils.info import extract_user_data_from_update
-from tgbot.models import User, TreningDay, Exercise
+from tgbot.models import User, TreningDay, Exercise, AddExerciseInTreningDay
 from tgbot.handlers.onboarding.keyboards import (
     make_keyboard_for_start_command,
     make_keyboard_for_choice_cycle_in_trenning,
@@ -90,7 +90,8 @@ def exercise_on_day(update: Update, context: CallbackContext) -> None:
         TreningDay,
         admin_name=day_in_button.replace('DAY_CH ', '')
     )
-    exercises = day.exercise.all()
+    # exercises = day.exercise.all()
+    exercises = AddExerciseInTreningDay.objects.filter(trening_day=day.trening_day)
     for exercise in exercises:
         do_exercise = get_object_or_404(
                         Exercise,
