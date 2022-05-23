@@ -32,10 +32,11 @@ def cycle_after_trening(update: Update, context: CallbackContext) -> None:
     trening_in_button = query.data
     query.answer()
     
-    text = trening_in_button
+    name = trening_in_button.replase('TRN_CH ', '')
+    text = static_text.choise_trening.format(name_trening=name)
     # text = f"{update.message.text.replace(f'{TRENING_BUTTON} ', '')}"
     
     query.message.reply_text(
         text=text,
-        # reply_markup=make_keyboard_for_choice_cycle_in_trenning(text),
+        reply_markup=make_keyboard_for_choice_cycle_in_trenning(name),
         )

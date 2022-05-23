@@ -29,17 +29,17 @@ def make_keyboard_for_start_command(user) -> InlineKeyboardMarkup:
     return InlineKeyboardMarkup(buttons)
 
 
-def make_keyboard_for_choice_cycle_in_trenning(trening_in_button):
+def make_keyboard_for_choice_cycle_in_trenning(name_trening):
     cycle_button = []
     buttons = []
     
     trening = get_object_or_404(
         Trening,
-        name=trening_in_button
+        name=name_trening
     )
-    cycles = AddCycleInTrening.objects.filter(trening=trening)
+    cycles = trening.cycle.all()
     for cycle in cycles:
-        cycle_button.append(cycle.cycle)
+        cycle_button.append(cycle)
     for spec in cycle_button:
         buttons.append(
             [InlineKeyboardButton(
