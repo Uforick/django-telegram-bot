@@ -91,7 +91,7 @@ def exercise_on_day(update: Update, context: CallbackContext) -> None:
         admin_name=day_in_button.replace('DAY_CH ', '')
     )
     # exercises = day.exercise.all()
-    exercises = AddExerciseInTreningDay.objects.filter(trening_day=day.trening_day)
+    exercises = AddExerciseInTreningDay.objects.filter(trening_day=day)
     for exercise in exercises:
         do_exercise = get_object_or_404(
                         Exercise,
