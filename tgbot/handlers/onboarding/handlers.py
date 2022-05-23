@@ -99,6 +99,7 @@ def exercise_on_day(update: Update, context: CallbackContext) -> None:
         teleg_exercise = static_text.trening_text.format(
                         exercise=do_exercise.name,
                         short_discription=do_exercise.short_discription,
+                        long_discription=do_exercise.long_discription,
                         representation=do_exercise.representation,
                         cycle=exercise.cycle,
                         amount=exercise.amount,
