@@ -1,12 +1,13 @@
 import datetime
 
 from django.utils import timezone
+from django.shortcuts import get_object_or_404
 from telegram import ParseMode, Update
 from telegram.ext import CallbackContext
 
 from tgbot.handlers.onboarding import static_text
 from tgbot.handlers.utils.info import extract_user_data_from_update
-from tgbot.models import User
+from tgbot.models import User, TreningDay, Exercise
 from tgbot.handlers.onboarding.keyboards import (
     make_keyboard_for_start_command,
     make_keyboard_for_choice_cycle_in_trenning,
@@ -76,3 +77,32 @@ def day_after_week(update: Update, context: CallbackContext) -> None:
         text=text,
         reply_markup=make_keyboard_for_choice_day_in_week(name),
         )
+
+
+def exercise_on_day(update: Update, context: CallbackContext) -> None:
+    #
+    texts=[]
+    query = update.callback_query
+    day_in_button = query.data
+    query.answer()
+    
+    day = get_object_or_404(
+        TreningDay,
+        admin_name=day_in_button.replace('DAY_CH ', '')
+    )
+    exercises = day.exercise.all()
+    for exercise in exercises:
+        do_exercise = get_object_or_404(
+                        Exercise,
+                        pk=exercise.exercise.pk)
+        teleg_exercise = static_text.trening_text.format(
+                        exercise=do_exercise.name,
+                        short_discription=do_exercise.short_discription,
+                        representation=do_exercise.representation,
+                        cycle=exercise.cycle,
+                        amount=exercise.amount,
+                        rir=exercise.rir,
+        )
+        texts.append(teleg_exercise)
+    for text in texts:
+        query.message.reply_text(text=text)
