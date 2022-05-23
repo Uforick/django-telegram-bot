@@ -17,7 +17,7 @@ Telegram bot with the ability to create individual trainings and training groups
 
 [![example workflow](https://github.com/Uforick/django-telegram-bot/tree/main/.github/workflows/dokku.yml/badge.svg)
 
-Авторство github.com/Uforick
+Author github.com/Uforick
 ---
 
 forked from ohld/django-telegram-bot
