@@ -15,7 +15,7 @@ Telegram bot with the ability to create individual trainings and training groups
 * Telegram API usage in pooling or [webhook mode]
 
 
-![example workflow](https://github.com/Uforick/django-telegram-bot/tree/main/.github/workflows/dokku.yml/badge.svg)
+[![example workflow](https://github.com/Uforick/django-telegram-bot/tree/main/.github/workflows/dokku.yml/badge.svg)
 
 Авторство github.com/Uforick
 ---
