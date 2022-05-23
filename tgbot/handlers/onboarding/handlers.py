@@ -7,7 +7,8 @@ from telegram.ext import CallbackContext
 from tgbot.handlers.onboarding import static_text
 from tgbot.handlers.utils.info import extract_user_data_from_update
 from tgbot.models import User
-from tgbot.handlers.onboarding.keyboards import make_keyboard_for_start_command
+from tgbot.handlers.onboarding.keyboards import make_keyboard_for_start_command, make_keyboard_for_choice_cycle_in_trenning
+from tgbot.handlers.onboarding.manage_data import TRENING_BUTTON, CYCLE_BUTTON, WEEK_BUTTON, DAY_BUTTON
 
 
 def command_start(update: Update, context: CallbackContext) -> None:
@@ -20,22 +21,16 @@ def command_start(update: Update, context: CallbackContext) -> None:
 
     u = User.get_user(update, context)
 
-    update.message.reply_text(text=text,
-                              reply_markup=make_keyboard_for_start_command(u))
-
-
-def secret_level(update: Update, context: CallbackContext) -> None:
-    # callback_data: SECRET_LEVEL_BUTTON variable from manage_data.py
-    """ Pressed 'secret_level_button_text' after /start command"""
-    user_id = extract_user_data_from_update(update)['user_id']
-    text = static_text.unlock_secret_room.format(
-        user_count=User.objects.count(),
-        active_24=User.objects.filter(updated_at__gte=timezone.now() - datetime.timedelta(hours=24)).count()
-    )
-
-    context.bot.edit_message_text(
+    update.message.reply_text(
         text=text,
-        chat_id=user_id,
-        message_id=update.callback_query.message.message_id,
-        parse_mode=ParseMode.HTML
-    )
+        reply_markup=make_keyboard_for_start_command(u))
+
+
+def cycle_after_trening(update: Update, context: CallbackContext) -> None:
+    #
+    text = f"{update.message.text.replace(f'{TRENING_BUTTON} ', '')}"
+    
+    update.message.reply_text(
+        text=text,
+        reply_markup=make_keyboard_for_choice_cycle_in_trenning(text),
+        )

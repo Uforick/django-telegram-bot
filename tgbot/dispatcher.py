@@ -19,7 +19,7 @@ from dtb.settings import TELEGRAM_TOKEN, DEBUG
 from tgbot.handlers.utils import files, error
 from tgbot.handlers.onboarding import handlers as onboarding_handlers
 from tgbot.handlers.broadcast_message import handlers as broadcast_handlers
-from tgbot.handlers.onboarding.manage_data import SECRET_LEVEL_BUTTON
+from tgbot.handlers.onboarding.manage_data import SECRET_LEVEL_BUTTON, TRENING_BUTTON
 from tgbot.handlers.broadcast_message.manage_data import CONFIRM_DECLINE_BROADCAST
 from tgbot.handlers.broadcast_message.static_text import broadcast_command
 
@@ -32,7 +32,7 @@ def setup_dispatcher(dp):
     dp.add_handler(CommandHandler("start", onboarding_handlers.command_start))
 
     # secret level
-    dp.add_handler(CallbackQueryHandler(onboarding_handlers.secret_level, pattern=f"^{SECRET_LEVEL_BUTTON}"))
+    dp.add_handler(CallbackQueryHandler(onboarding_handlers.cycle_after_trening, pattern=rf"^{TRENING_BUTTON}(/s)?.*"))
 
     # broadcast message
     dp.add_handler(

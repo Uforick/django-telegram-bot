@@ -1,8 +1,10 @@
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 
-from tgbot.handlers.onboarding.manage_data import SECRET_LEVEL_BUTTON
+from django.shortcuts import get_object_or_404
+
+from tgbot.handlers.onboarding.manage_data import TRENING_BUTTON, CYCLE_BUTTON, WEEK_BUTTON, DAY_BUTTON
 from tgbot.handlers.onboarding.static_text import github_button_text, secret_level_button_text
-from tgbot.models import Trening
+from tgbot.models import Trening, AddCycleInTrening
 
 
 def make_keyboard_for_start_command(user) -> InlineKeyboardMarkup:
@@ -16,7 +18,7 @@ def make_keyboard_for_start_command(user) -> InlineKeyboardMarkup:
         buttons.append(
             [InlineKeyboardButton(
                 text = str(spec.name),
-                callback_data = str(spec.name),
+                callback_data = f'{TRENING_BUTTON} {str(spec.name)}',
             )]
         )
     # buttons = [[
@@ -25,3 +27,25 @@ def make_keyboard_for_start_command(user) -> InlineKeyboardMarkup:
     # ]]
 
     return InlineKeyboardMarkup(buttons)
+
+
+def make_keyboard_for_choice_cycle_in_trenning(trening_in_button):
+    cycle_button = []
+    buttons = []
+    
+    trening = get_object_or_404(
+        Trening,
+        name=trening_in_button
+    )
+    cycles = AddCycleInTrening.objects.filter(trening=trening)
+    for cycle in cycles:
+        cycle_button.append(cycle.cycle)
+    for spec in cycle_button:
+        buttons.append(
+            [InlineKeyboardButton(
+                text = str(spec.name),
+                callback_data = f'{CYCLE_BUTTON} {str(spec.name)}',
+            )]
+        )
+    return InlineKeyboardMarkup(buttons)
+    
