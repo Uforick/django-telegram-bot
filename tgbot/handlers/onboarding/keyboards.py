@@ -43,8 +43,8 @@ def make_keyboard_for_choice_cycle_in_trenning(name_trening):
     for spec in cycle_button:
         buttons.append(
             [InlineKeyboardButton(
-                text = str(spec.name),
-                callback_data = f'{CYCLE_BUTTON} {str(spec.name)}',
+                text = str(spec.admin_name),
+                callback_data = f'{CYCLE_BUTTON} {str(spec.admin_name)}',
             )]
         )
     return InlineKeyboardMarkup(buttons)
