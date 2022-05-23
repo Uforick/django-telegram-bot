@@ -28,9 +28,14 @@ def command_start(update: Update, context: CallbackContext) -> None:
 
 def cycle_after_trening(update: Update, context: CallbackContext) -> None:
     #
-    text = f"{update.message.text.replace(f'{TRENING_BUTTON} ', '')}"
+    query = update.callback_query
+    trening_in_button = query.data
+    query.answer()
+    
+    text = trening_in_button
+    # text = f"{update.message.text.replace(f'{TRENING_BUTTON} ', '')}"
     
     update.message.reply_text(
         text=text,
-        reply_markup=make_keyboard_for_choice_cycle_in_trenning(text),
+        # reply_markup=make_keyboard_for_choice_cycle_in_trenning(text),
         )
