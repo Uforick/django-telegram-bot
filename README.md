@@ -1,7 +1,7 @@
 # Telegram bot for individual trainings
 
 
-### Check the example bot that uses the code from Main branch: [t.me/djangotelegrambot](https://t.me/djangotelegrambot)
+### Check the example bot that uses the code from Main branch: [t.me/How_to_be_athletic_bot](http://t.me/How_to_be_athletic_bot)
 Telegram bot with the ability to create individual trainings and training groups. Thanks to the benefits of the Django admin panel, it is possible to personalize workouts for a person or a group of people.
 
 ## Used technologies
