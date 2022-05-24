@@ -297,7 +297,7 @@ class User(CreateUpdateTracker):
         Trening,
         related_name='user',
         verbose_name='Доступные тренировки',
-        default=default_trening(), #тестовая строка, расскоментировать после создания первого тренинка
+        # default=default_trening, #тестовая строка, расскоментировать после создания первого тренинка
     )
     
     
@@ -317,7 +317,7 @@ class User(CreateUpdateTracker):
                 payload = context.args[0]
                 if str(payload).strip() != str(data["user_id"]).strip():  # you can't invite yourself
                     u.deep_link = payload
-                    u.available_training.add(default_trening())
+                    u.available_training.add(Trening.objects.get(pk=1))
                     u.save()
 
         return u, created
