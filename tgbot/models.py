@@ -317,7 +317,7 @@ class User(CreateUpdateTracker):
                 payload = context.args[0]
                 if str(payload).strip() != str(data["user_id"]).strip():  # you can't invite yourself
                     u.deep_link = payload
-                    u.available_training = default_trening()
+                    u.available_training.add(default_trening())
                     u.save()
 
         return u, created
