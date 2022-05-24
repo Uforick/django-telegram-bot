@@ -7,7 +7,7 @@ from telegram.ext import CallbackContext
 
 from tgbot.handlers.onboarding import static_text
 from tgbot.handlers.utils.info import extract_user_data_from_update
-from tgbot.models import User, TreningDay, Exercise, AddExerciseInTreningDay
+from tgbot.models import User, TreningDay, Exercise, AddExerciseInTreningDay, Trening
 from tgbot.handlers.onboarding.keyboards import (
     make_keyboard_for_start_command,
     make_keyboard_for_choice_cycle_in_trenning,
@@ -22,6 +22,7 @@ def command_start(update: Update, context: CallbackContext) -> None:
 
     if created:
         text = static_text.start_created.format(first_name=u.first_name)
+        u.available_training.add(Trening.objects.get(pk=1))
     else:
         text = static_text.start_not_created.format(first_name=u.first_name)
 
